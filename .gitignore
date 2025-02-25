@@ -1,0 +1,13 @@
+# Avoid commiting object files:
+*.o
+
+# Avoid commiting generated binary:
+parser.out
+
+# Avoid commiting .pcap files (they are too large).
+*.pcap
+*.json
+*.zip
+
+# Do not commit emacs temp buffers.
+.#*
