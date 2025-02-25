@@ -130,10 +130,26 @@ In the networking part, we just skip through those as quickly as possible to sta
 ## Perf profiling
 Lets also do some more extensive profiling, using the sampling profiler `perf`.
 ```
-$ sudo perf record -F 999 -g -e cycles,instructions,cache-misses,branch-misses,cpu-clock,task-clock,page-faults,cache-references,cache-misses -- ./parser.out
+# Sample profile the program.
+$ sudo perf record -F 999 --call-graph dwarf -- ./parser.out
 
+# Create a flamegraph from the perf.data.
+$ perf script | ~/Projects/Git/Public/FlameGraph/stackcollapse-perf.pl | ~/Projects/Git/Public/FlameGraph/flamegraph.pl > perf.svg
+
+# Text report of the profiling.
+$ perf report --stdio > perf.report
 ```
-I want to generate a flame graph as those nicely represent the time spent in a function.
+
+This generates the following flamegraph:
+
+![Regular perf](prof/perf/perf.svg)
+
+This flamegraph also shows us how much time is spent in various system level functions.
+In order to create a flamegraph of just the time spent in various functions within the binary.
+We can add the `--all-user` flag to `perf record`.
+This generates the following svg:
+
+![Only user perf](prof/perf/perf-only-user.svg)
 
 ## Callgrind analysis
 Lets also run `callgrind` on the binary to get report of how many clock cycles each function costs.

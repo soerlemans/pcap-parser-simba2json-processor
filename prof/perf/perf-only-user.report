@@ -1,0 +1,492 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 32  of event 'cpu_atom/cycles/P'
+# Event count (approx.): 79172389
+#
+# Overhead  Command     Shared Object         Symbol                                                                                                                                                                                                                                                                        
+# ........  ..........  ....................  ..............................................................................................................................................................................................................................................................................
+#
+    29.12%  parser.out  libstdc++.so.6.0.33   [.] std::basic_streambuf<char, std::char_traits<char> >::xsputn(char const*, long)
+            |
+            ---std::basic_streambuf<char, std::char_traits<char> >::xsputn(char const*, long)
+               std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)
+               std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*) (inlined)
+               |          
+               |--14.31%--std::ostream& operator<< <unsigned long>(std::ostream&, simba::JsonPair<unsigned long>&&) (inlined)
+               |          operator<<(std::ostream&, simba::SimbaMarketDataPacketHeader const&) (inlined)
+               |          operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+               |          simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+               |          0xffffffffffffffff
+               |          
+               |--11.42%--operator<<(std::ostream&, simba::SimbaMarketDataPacketHeader const&) (inlined)
+               |          operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+               |          simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+               |          0xffffffffffffffff
+               |          
+                --3.39%--operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+                          simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+                          0xffffffffffffffff
+
+    17.68%  parser.out  parser.out            [.] simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+            |
+            ---simba::Ethernet2Header const* simba::DataField::consume<simba::Ethernet2Header>() (inlined)
+               simba::extract_ethernet2_frame(simba::DataField&) (inlined)
+               simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+               0xffffffffffffffff
+
+    14.26%  parser.out  libc.so.6             [.] __memset_avx2_unaligned_erms
+            |
+            ---__memset_avx2_unaligned_erms
+               0x55ac79e8799f
+
+    13.82%  parser.out  libstdc++.so.6.0.33   [.] std::ostream::sentry::sentry(std::ostream&)
+            |
+            ---std::ostream::sentry::sentry(std::ostream&)
+               |          
+               |--10.33%--std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)
+               |          std::ostream::operator<<(unsigned long) (inlined)
+               |          std::ostream& operator<< <unsigned long>(std::ostream&, simba::JsonPair<unsigned long>&&) (inlined)
+               |          operator<<(std::ostream&, simba::SimbaMarketDataPacketHeader const&) (inlined)
+               |          operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+               |          simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+               |          0xffffffffffffffff
+               |          
+                --3.48%--std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)
+                          std::basic_ostream<char, std::char_traits<char> >& std::operator<< <char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, std::basic_string_view<char, std::char_traits<char> >) (inlined)
+                          std::ostream& operator<< <unsigned short>(std::ostream&, simba::JsonPair<unsigned short>&&) (inlined)
+                          operator<<(std::ostream&, simba::SimbaMarketDataPacketHeader const&) (inlined)
+                          operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+                          simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+                          0xffffffffffffffff
+
+     8.57%  parser.out  libstdc++.so.6.0.33   [.] std::basic_filebuf<char, std::char_traits<char> >::xsputn(char const*, long)
+            |
+            ---std::basic_filebuf<char, std::char_traits<char> >::xsputn(char const*, long)
+               std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)
+               std::basic_ostream<char, std::char_traits<char> >& std::operator<< <char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, std::basic_string_view<char, std::char_traits<char> >) (inlined)
+               std::ostream& operator<< <unsigned long>(std::ostream&, simba::JsonPair<unsigned long>&&) (inlined)
+               operator<<(std::ostream&, simba::SimbaMarketDataPacketHeader const&) (inlined)
+               operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+               simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+               0xffffffffffffffff
+
+     5.04%  parser.out  libstdc++.so.6.0.33   [.] std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)
+            |
+            ---std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)
+               |          
+               |--3.54%--0x7fadf45b5180
+               |          
+                --1.50%--std::basic_ostream<char, std::char_traits<char> >& std::operator<< <char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, std::basic_string_view<char, std::char_traits<char> >) (inlined)
+                          std::ostream& operator<< <unsigned short>(std::ostream&, simba::JsonPair<unsigned short>&&) (inlined)
+                          operator<<(std::ostream&, simba::SimbaMarketDataPacketHeader const&) (inlined)
+                          operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+                          simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+                          0xffffffffffffffff
+
+     3.96%  parser.out  ld-linux-x86-64.so.2  [.] _dl_relocate_object
+            |
+            ---resolve_map (inlined)
+               elf_machine_rela (inlined)
+               elf_dynamic_do_Rela (inlined)
+               _dl_relocate_object
+
+     3.65%  parser.out  libstdc++.so.6.0.33   [.] std::ostream::put(char)
+            |
+            ---std::ostream::put(char)
+               std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char) (inlined)
+               simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+               0xffffffffffffffff
+
+     3.31%  parser.out  libstdc++.so.6.0.33   [.] 0x0000000000131f00
+            |
+            ---0x7fae43b31f00
+               std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long) const
+               std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)
+               std::ostream::operator<<(unsigned short) (inlined)
+               std::ostream& operator<< <unsigned short>(std::ostream&, simba::JsonPair<unsigned short>&&) (inlined)
+               operator<<(std::ostream&, simba::SimbaMarketDataPacketHeader const&) (inlined)
+               operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+               simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+               0xffffffffffffffff
+
+     0.57%  parser.out  ld-linux-x86-64.so.2  [.] get_common_indices.constprop.0
+            |
+            ---get_common_indices (inlined)
+
+     0.04%  parser.out  libstdc++.so.6.0.33   [.] std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long) const
+     0.02%  parser.out  ld-linux-x86-64.so.2  [.] _dl_start
+     0.00%  parser.out  libstdc++.so.6.0.33   [.] std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long) const@plt
+     0.00%  parser.out  libstdc++.so.6.0.33   [.] std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long) const
+     0.00%  parser.out  ld-linux-x86-64.so.2  [.] _start
+
+
+# Samples: 11K of event 'cpu_core/cycles/P'
+# Event count (approx.): 39184975696
+#
+# Overhead  Command     Shared Object         Symbol                                                                                                                                                                                                                                                                        
+# ........  ..........  ....................  ..............................................................................................................................................................................................................................................................................
+#
+    17.09%  parser.out  libstdc++.so.6.0.33   [.] std::basic_filebuf<char, std::char_traits<char> >::xsputn(char const*, long)
+            |
+            ---std::basic_filebuf<char, std::char_traits<char> >::xsputn(char const*, long)
+               |          
+               |--9.11%--std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)
+               |          |          
+               |          |--6.91%--std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*) (inlined)
+               |          |          |          
+               |          |          |--1.26%--operator<<(std::ostream&, simba::SimbaMarketDataPacketHeader const&) (inlined)
+               |          |          |          operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+               |          |          |          simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+               |          |          |          0xffffffffffffffff
+               |          |          |          
+               |          |          |--1.01%--operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+               |          |          |          simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+               |          |          |          0xffffffffffffffff
+               |          |          |          
+               |          |          |--0.99%--std::ostream& operator<< <unsigned short>(std::ostream&, simba::JsonPair<unsigned short>&&) (inlined)
+               |          |          |          |          
+               |          |          |           --0.70%--operator<<(std::ostream&, simba::SimbaMarketDataPacketHeader const&) (inlined)
+               |          |          |                     operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+               |          |          |                     simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+               |          |          |                     0xffffffffffffffff
+               |          |          |          
+               |          |           --0.60%--operator<<(std::ostream&, std::vector<simba::SbeMessage, std::allocator<simba::SbeMessage> > const&) (inlined)
+               |          |                     std::ostream& operator<< <std::vector<simba::SbeMessage, std::allocator<simba::SbeMessage> > >(std::ostream&, simba::JsonPair<std::vector<simba::SbeMessage, std::allocator<simba::SbeMessage> > >&&) (inlined)
+               |          |                     operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+               |          |                     simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+               |          |                     0xffffffffffffffff
+               |          |          
+               |           --2.19%--std::basic_ostream<char, std::char_traits<char> >& std::operator<< <char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, std::basic_string_view<char, std::char_traits<char> >) (inlined)
+               |                     |          
+               |                      --0.71%--std::ostream& operator<< <unsigned short>(std::ostream&, simba::JsonPair<unsigned short>&&) (inlined)
+               |          
+               |--2.13%--0x1
+               |          
+               |--2.00%--std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long) const
+               |          |          
+               |           --1.81%--std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)
+               |                     |          
+               |                      --0.93%--std::ostream::operator<<(unsigned short) (inlined)
+               |                                |          
+               |                                 --0.79%--std::ostream& operator<< <unsigned short>(std::ostream&, simba::JsonPair<unsigned short>&&) (inlined)
+               |          
+                --0.73%--0xffffffffffffffff
+
+    15.20%  parser.out  libstdc++.so.6.0.33   [.] std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)
+            |
+            ---std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)
+               |          
+               |--5.29%--std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*) (inlined)
+               |          |          
+               |          |--1.06%--operator<<(std::ostream&, simba::SimbaMarketDataPacketHeader const&) (inlined)
+               |          |          operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+               |          |          simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+               |          |          0xffffffffffffffff
+               |          |          
+               |          |--0.99%--operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+               |          |          simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+               |          |          0xffffffffffffffff
+               |          |          
+               |           --0.56%--std::ostream& operator<< <unsigned short>(std::ostream&, simba::JsonPair<unsigned short>&&) (inlined)
+               |          
+               |--2.08%--std::basic_ostream<char, std::char_traits<char> >& std::operator<< <char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, std::basic_string_view<char, std::char_traits<char> >) (inlined)
+               |          |          
+               |           --0.68%--std::ostream& operator<< <unsigned short>(std::ostream&, simba::JsonPair<unsigned short>&&) (inlined)
+               |          
+               |--0.64%--0x55ac6a2af100
+               |          
+                --0.61%--0x55ac6a2af037
+
+    14.85%  parser.out  libstdc++.so.6.0.33   [.] std::basic_streambuf<char, std::char_traits<char> >::xsputn(char const*, long)
+            |
+            ---std::basic_streambuf<char, std::char_traits<char> >::xsputn(char const*, long)
+               |          
+               |--5.44%--std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)
+               |          |          
+               |          |--4.07%--std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*) (inlined)
+               |          |          |          
+               |          |          |--0.94%--operator<<(std::ostream&, simba::SimbaMarketDataPacketHeader const&) (inlined)
+               |          |          |          operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+               |          |          |          simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+               |          |          |          0xffffffffffffffff
+               |          |          |          
+               |          |           --0.54%--std::ostream& operator<< <unsigned short>(std::ostream&, simba::JsonPair<unsigned short>&&) (inlined)
+               |          |          
+               |           --1.30%--std::basic_ostream<char, std::char_traits<char> >& std::operator<< <char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, std::basic_string_view<char, std::char_traits<char> >) (inlined)
+               |          
+               |--3.11%--0x7fff6a4db8bf
+               |          
+               |--1.20%--std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long) const
+               |          std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)
+               |          |          
+               |           --0.74%--std::ostream::operator<<(unsigned short) (inlined)
+               |                     |          
+               |                      --0.61%--std::ostream& operator<< <unsigned short>(std::ostream&, simba::JsonPair<unsigned short>&&) (inlined)
+               |          
+                --0.65%--0x31ff
+
+     6.79%  parser.out  libstdc++.so.6.0.33   [.] std::ostream::sentry::sentry(std::ostream&)
+            |
+            ---std::ostream::sentry::sentry(std::ostream&)
+               |          
+               |--2.13%--std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)
+               |          |          
+               |          |--1.60%--std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*) (inlined)
+               |          |          
+               |           --0.52%--std::basic_ostream<char, std::char_traits<char> >& std::operator<< <char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, std::basic_string_view<char, std::char_traits<char> >) (inlined)
+               |          
+                --0.75%--0x55ac6a2af191
+
+     5.29%  parser.out  libc.so.6             [.] __memmove_avx_unaligned_erms
+            |
+            ---__memcpy_avx_unaligned_erms (inlined)
+
+     5.13%  parser.out  parser.out            [.] simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+            |          
+            |--1.88%--simba::Ethernet2Header const* simba::DataField::consume<simba::Ethernet2Header>() (inlined)
+            |          simba::extract_ethernet2_frame(simba::DataField&) (inlined)
+            |          simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+            |          0xffffffffffffffff
+            |          
+             --1.32%--std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*) (inlined)
+
+     4.76%  parser.out  libstdc++.so.6.0.33   [.] std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long) const
+            |
+            ---std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long) const
+               |          
+                --4.27%--std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)
+                          |          
+                          |--2.33%--std::ostream::operator<<(unsigned short) (inlined)
+                          |          |          
+                          |           --2.04%--std::ostream& operator<< <unsigned short>(std::ostream&, simba::JsonPair<unsigned short>&&) (inlined)
+                          |                     |          
+                          |                     |--1.29%--operator<<(std::ostream&, simba::SimbaMarketDataPacketHeader const&) (inlined)
+                          |                     |          operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+                          |                     |          simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+                          |                     |          0xffffffffffffffff
+                          |                     |          
+                          |                      --0.75%--operator<<(std::ostream&, simba::SbeHeader const&) (inlined)
+                          |                                std::ostream& operator<< <simba::SbeHeader>(std::ostream&, simba::JsonPair<simba::SbeHeader>&&) (inlined)
+                          |                                operator<<(std::ostream&, simba::SbeMessage const&) (inlined)
+                          |                                operator<<(std::ostream&, std::vector<simba::SbeMessage, std::allocator<simba::SbeMessage> > const&) (inlined)
+                          |                                std::ostream& operator<< <std::vector<simba::SbeMessage, std::allocator<simba::SbeMessage> > >(std::ostream&, simba::JsonPair<std::vector<simba::SbeMessage, std::allocator<simba::SbeMessage> > >&&) (inlined)
+                          |                                operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+                          |                                simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+                          |                                0xffffffffffffffff
+                          |          
+                          |--1.31%--std::ostream::operator<<(unsigned long) (inlined)
+                          |          std::ostream& operator<< <unsigned long>(std::ostream&, simba::JsonPair<unsigned long>&&) (inlined)
+                          |          |          
+                          |           --0.85%--operator<<(std::ostream&, simba::SimbaMarketDataPacketHeader const&) (inlined)
+                          |                     operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+                          |                     simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+                          |                     0xffffffffffffffff
+                          |          
+                           --0.64%--std::ostream::operator<<(unsigned int) (inlined)
+                                     std::ostream& operator<< <unsigned int>(std::ostream&, simba::JsonPair<unsigned int>&&) (inlined)
+                                     |          
+                                      --0.52%--operator<<(std::ostream&, simba::SimbaMarketDataPacketHeader const&) (inlined)
+                                                operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+                                                simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+                                                0xffffffffffffffff
+
+     4.06%  parser.out  parser.out            [.] test_default()
+            |          
+             --3.95%--test_default()
+                       pcap::PcapBuffer::PcapBuffer(std::vector<char, std::allocator<char> >&&) (inlined)
+                       pcap::read_pcap_file(std::filesystem::__cxx11::path) (inlined)
+                       test_default()
+                       __libc_start_call_main
+
+     3.67%  parser.out  libc.so.6             [.] __memset_avx2_unaligned_erms
+            |          
+            |--2.71%--__memset_avx2_unaligned_erms
+            |          0x55ac79e8799f
+            |          
+             --0.96%--0xffffffffaee01280
+
+     3.25%  parser.out  libstdc++.so.6.0.33   [.] std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)
+            |
+            ---std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)
+               |          
+               |--1.29%--std::ostream::operator<<(unsigned short) (inlined)
+               |          |          
+               |           --1.12%--std::ostream& operator<< <unsigned short>(std::ostream&, simba::JsonPair<unsigned short>&&) (inlined)
+               |                     |          
+               |                      --0.66%--operator<<(std::ostream&, simba::SimbaMarketDataPacketHeader const&) (inlined)
+               |                                operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+               |                                simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+               |                                0xffffffffffffffff
+               |          
+                --0.60%--std::ostream::operator<<(unsigned long) (inlined)
+                          std::ostream& operator<< <unsigned long>(std::ostream&, simba::JsonPair<unsigned long>&&) (inlined)
+
+     1.45%  parser.out  libstdc++.so.6.0.33   [.] std::codecvt<char, char, __mbstate_t>::do_always_noconv() const
+            |
+            ---std::codecvt<char, char, __mbstate_t>::do_always_noconv() const
+               |          
+                --1.20%--0x7fff6a4db8bf
+
+     1.42%  parser.out  libstdc++.so.6.0.33   [.] memcpy@plt
+            |
+            ---memcpy@plt
+               std::basic_streambuf<char, std::char_traits<char> >::xsputn(char const*, long)
+               |          
+                --1.18%--std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)
+                          |          
+                           --0.87%--std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*) (inlined)
+
+     1.42%  parser.out  libstdc++.so.6.0.33   [.] 0x0000000000131f0a
+            |
+            ---0x7fae43b31f0a
+               |          
+                --1.16%--std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long) const
+                          std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)
+                          |          
+                           --0.79%--std::ostream::operator<<(unsigned long) (inlined)
+                                     std::ostream& operator<< <unsigned long>(std::ostream&, simba::JsonPair<unsigned long>&&) (inlined)
+                                     |          
+                                      --0.61%--operator<<(std::ostream&, simba::SimbaMarketDataPacketHeader const&) (inlined)
+                                                operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+                                                simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+                                                0xffffffffffffffff
+
+     1.35%  parser.out  libstdc++.so.6.0.33   [.] std::basic_streambuf<char, std::char_traits<char> >::xsputn(char const*, long)@plt
+            |
+            ---std::basic_streambuf<char, std::char_traits<char> >::xsputn(char const*, long)@plt
+               |          
+                --1.06%--std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)
+                          |          
+                           --0.76%--std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*) (inlined)
+
+     1.20%  parser.out  libstdc++.so.6.0.33   [.] std::ostream::sentry::sentry(std::ostream&)@plt
+            |
+            ---std::ostream::sentry::sentry(std::ostream&)@plt
+               |          
+                --1.09%--std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)
+                          |          
+                           --0.88%--std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*) (inlined)
+
+     1.18%  parser.out  libstdc++.so.6.0.33   [.] 0x0000000000131f2d
+            |
+            ---0x7fae43b31f2d
+               |          
+                --0.95%--std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long) const
+                          std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)
+                          |          
+                           --0.81%--std::ostream::operator<<(unsigned long) (inlined)
+                                     std::ostream& operator<< <unsigned long>(std::ostream&, simba::JsonPair<unsigned long>&&) (inlined)
+                                     |          
+                                      --0.61%--operator<<(std::ostream&, simba::SimbaMarketDataPacketHeader const&) (inlined)
+                                                operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+                                                simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+                                                0xffffffffffffffff
+
+     1.15%  parser.out  libstdc++.so.6.0.33   [.] 0x0000000000131f15
+            |
+            ---0x7fae43b31f15
+               |          
+                --0.94%--std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long) const
+                          std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)
+                          |          
+                           --0.67%--std::ostream::operator<<(unsigned long) (inlined)
+                                     std::ostream& operator<< <unsigned long>(std::ostream&, simba::JsonPair<unsigned long>&&) (inlined)
+                                     |          
+                                      --0.52%--operator<<(std::ostream&, simba::SimbaMarketDataPacketHeader const&) (inlined)
+                                                operator<<(std::ostream&, simba::SimbaPacket const&) (inlined)
+                                                simba::simba_extractor(pcap::PcapBuffer const&, std::filesystem::__cxx11::path)
+                                                0xffffffffffffffff
+
+     1.02%  parser.out  parser.out            [.] std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@plt
+            |
+            ---std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@plt
+               |          
+                --0.66%--std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*) (inlined)
+
+     1.00%  parser.out  libstdc++.so.6.0.33   [.] 0x0000000000131f23
+            |
+            ---0x7fae43b31f23
+               |          
+                --0.89%--std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long) const
+                          std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)
+                          |          
+                           --0.55%--std::ostream::operator<<(unsigned long) (inlined)
+                                     std::ostream& operator<< <unsigned long>(std::ostream&, simba::JsonPair<unsigned long>&&) (inlined)
+
+     0.97%  parser.out  parser.out            [.] simba::DataField::consume(unsigned long)
+            |
+            ---simba::DataField::consume(unsigned long)
+
+     0.71%  parser.out  libstdc++.so.6.0.33   [.] std::locale::id::_M_id() const
+            |
+            ---std::locale::id::_M_id() const
+
+     0.61%  parser.out  libstdc++.so.6.0.33   [.] 0x000000000012e0a4
+            |
+            ---0x7fae43b2e0a4
+
+     0.56%  parser.out  libstdc++.so.6.0.33   [.] std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const
+            |
+            ---std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const
+
+     0.52%  parser.out  libstdc++.so.6.0.33   [.] 0x0000000000131f21
+            |
+            ---0x7fae43b31f21
+
+     0.38%  parser.out  libstdc++.so.6.0.33   [.] std::ostream& std::ostream::_M_insert<long>(long)
+     0.32%  parser.out  libstdc++.so.6.0.33   [.] 0x000000000012e0c4
+     0.32%  parser.out  libstdc++.so.6.0.33   [.] 0x000000000012e0ca
+     0.31%  parser.out  parser.out            [.] operator<<(std::ostream&, simba::SbeMessageOrderUpdate const&) [clone .isra.0]
+     0.29%  parser.out  libstdc++.so.6.0.33   [.] 0x0000000000131eef
+     0.29%  parser.out  libc.so.6             [.] _int_free
+     0.28%  parser.out  parser.out            [.] std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)@plt
+     0.28%  parser.out  libstdc++.so.6.0.33   [.] 0x000000000012e0b3
+     0.28%  parser.out  libstdc++.so.6.0.33   [.] std::locale::id::_M_id() const@plt
+     0.26%  parser.out  libstdc++.so.6.0.33   [.] 0x000000000012e095
+     0.24%  parser.out  libc.so.6             [.] malloc
+     0.24%  parser.out  libstdc++.so.6.0.33   [.] std::ostream::put(char)
+     0.24%  parser.out  libstdc++.so.6.0.33   [.] std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long) const
+     0.22%  parser.out  libstdc++.so.6.0.33   [.] 0x0000000000131eca
+     0.20%  parser.out  libstdc++.so.6.0.33   [.] std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long) const@plt
+     0.18%  parser.out  libstdc++.so.6.0.33   [.] 0x0000000000131f34
+     0.18%  parser.out  libc.so.6             [.] cfree@GLIBC_2.2.5
+     0.12%  parser.out  libstdc++.so.6.0.33   [.] 0x0000000000131f32
+     0.10%  parser.out  [unknown]             [k] 0xffffffffaee01928
+     0.07%  parser.out  libstdc++.so.6.0.33   [.] std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const@plt
+     0.05%  parser.out  libstdc++.so.6.0.33   [.] malloc@plt
+     0.04%  parser.out  libc.so.6             [.] __GI___writev
+     0.04%  parser.out  libstdc++.so.6.0.33   [.] 0x0000000000131f06
+     0.04%  parser.out  libstdc++.so.6.0.33   [.] operator new(unsigned long)
+     0.04%  parser.out  [unknown]             [k] 0xffffffffaee001c8
+     0.03%  parser.out  libstdc++.so.6.0.33   [.] std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const
+     0.03%  parser.out  libstdc++.so.6.0.33   [.] std::__basic_file<char>::xsputn_2(char const*, long, char const*, long)
+     0.03%  parser.out  libstdc++.so.6.0.33   [.] 0x0000000000131f2f
+     0.03%  parser.out  parser.out            [.] std::ostream::put(char)@plt
+     0.03%  parser.out  libstdc++.so.6.0.33   [.] 0x0000000000131f11
+     0.03%  parser.out  libstdc++.so.6.0.33   [.] operator delete(void*)
+     0.02%  parser.out  libstdc++.so.6.0.33   [.] 0x0000000000131f1b
+     0.02%  parser.out  libstdc++.so.6.0.33   [.] 0x000000000012e0af
+     0.02%  parser.out  libstdc++.so.6.0.33   [.] free@plt
+     0.01%  parser.out  libstdc++.so.6.0.33   [.] 0x000000000012e0a9
+     0.01%  parser.out  libstdc++.so.6.0.33   [.] 0x0000000000131f0d
+     0.01%  parser.out  libstdc++.so.6.0.33   [.] operator delete(void*, unsigned long)
+     0.01%  parser.out  libstdc++.so.6.0.33   [.] fileno@plt
+     0.01%  parser.out  parser.out            [.] operator new(unsigned long)@plt
+     0.01%  parser.out  libstdc++.so.6.0.33   [.] 0x0000000000131f29
+     0.01%  parser.out  libstdc++.so.6.0.33   [.] operator delete(void*)@plt
+     0.01%  parser.out  parser.out            [.] memcpy@plt
+     0.01%  parser.out  parser.out            [.] std::ostream& std::ostream::_M_insert<long>(long)@plt
+     0.01%  parser.out  libstdc++.so.6.0.33   [.] 0x000000000012e090
+     0.01%  parser.out  libc.so.6             [.] _IO_un_link
+     0.00%  parser.out  ld-linux-x86-64.so.2  [.] _dl_fixup
+     0.00%  parser.out  libc.so.6             [.] _IO_file_close_it@@GLIBC_2.2.5
+     0.00%  parser.out  libc.so.6             [.] __close_nocancel
+     0.00%  parser.out  libc.so.6             [.] read
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#
