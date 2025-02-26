@@ -14,12 +14,14 @@ namespace {
 // Using Statements:
 using pcap::ByteBuffer;
 using pcap::PacketRegistery;
+using pcap::PcapFileHeader;
 using pcap::PcapPacketRecord;
+using pcap::PcapMagicNumber;
 using std::filesystem::path;
 
 // Variables:
-constinit auto pcap_file_header_size{sizeof(pcap::PcapFileHeader)};
-constinit auto pcap_record_size{sizeof(pcap::PcapPacketRecord)};
+constinit auto pcap_file_header_size{sizeof(PcapFileHeader)};
+constinit auto pcap_record_size{sizeof(PcapPacketRecord)};
 
 //! Copy whole file once to prevent slow down by repeated reading/copying.
 inline auto init_file_buffer(const path &t_path) -> std::vector<char> {
@@ -44,6 +46,29 @@ inline auto init_file_buffer(const path &t_path) -> std::vector<char> {
   return file_buffer;
 }
 
+//! Used to verify the mime type.
+inline auto verify_magic_number(const PcapFileHeader *t_file_header) -> void {
+  const auto magic_number{
+      static_cast<PcapMagicNumber>(t_file_header->m_magic_number)};
+
+  switch (magic_number) {
+  case PcapMagicNumber::PCAP_MS:
+    // TODO: Set flag for microseconds.
+    break;
+
+  case PcapMagicNumber::PCAP_NS:
+    // TODO: Set flag for nanoseconds.
+    break;
+
+  default:
+    // Prevent wasting time on parsing something that is not a pcap file.
+    // Throw an exception even though they are expensive.
+    // This is a critical failure so it is warranted.
+    throw std::invalid_argument{"Unsupported MIME type for PcapBuffer."};
+    break;
+  }
+}
+
 inline auto init_registery(const ByteBuffer &t_buffer,
                            PacketRegistery &t_registery) -> void {
   std::size_t index{pcap_file_header_size};
@@ -63,14 +88,10 @@ inline auto init_registery(const ByteBuffer &t_buffer,
 } // namespace
 
 namespace pcap {
-// Public Methods:
+// Protected Methods:
 PcapBuffer::PcapBuffer(ByteBuffer &&t_buffer)
     : m_buffer{std::move(t_buffer)},
-      m_file_header{view_cast<PcapFileHeader>(m_buffer.data())},
-      m_registery{} {
-  // Verify pcap header is compatible/parseable.
-  verify();
-
+      m_file_header{view_cast<PcapFileHeader>(m_buffer.data())}, m_registery{} {
   // Rough optimization reserve the minimum required space on the heap.
   const auto reserve_size{m_buffer.size() / pcap_record_size};
 
@@ -82,28 +103,7 @@ PcapBuffer::PcapBuffer(ByteBuffer &&t_buffer)
   init_registery(m_buffer, m_registery);
 }
 
-auto PcapBuffer::verify() -> void {
-  const auto magic_number{
-      static_cast<PcapMagicNumber>(m_file_header->m_magic_number)};
-
-  switch (magic_number) {
-    case PcapMagicNumber::PCAP_MS:
-      // TODO: Set flag.
-      break;
-
-    case PcapMagicNumber::PCAP_NS:
-      // TODO: Set flag.
-      break;
-
-    default:
-      // Prevent wasting time on parsing something that is not a pcap file.
-      // Throw an exception even though they are expensive.
-      // This is a critical failure so it is warranted.
-      throw std::invalid_argument{"Unsupported MIME type for PcapBuffer."};
-      break;
-  }
-}
-
+// Public Methods:
 auto PcapBuffer::header() const -> const PcapFileHeader * {
   return m_file_header;
 }
@@ -124,9 +124,7 @@ auto PcapBuffer::cend() const -> PacketRegistery::const_iterator {
   return m_registery.cend();
 }
 
-auto PcapBuffer::size() const -> std::size_t {
-  return m_registery.size();
-}
+auto PcapBuffer::size() const -> std::size_t { return m_registery.size(); }
 
 auto PcapBuffer::operator[](const std::size_t t_index) const
     -> const RecordPack & {
@@ -135,12 +133,15 @@ auto PcapBuffer::operator[](const std::size_t t_index) const
 
 // Functions:
 auto read_pcap_file(const path t_path) -> PcapBuffer {
-  // RVO is applied here so we do not copy the std::vector.
-  PcapBuffer pcap_buffer{init_file_buffer(t_path)};
+  // First we need to check the magic number if the file is a PCAP file.
+  ByteBuffer byte_buffer{init_file_buffer(t_path)};
 
-  pcap_buffer.verify();
+  const auto *file_header{view_cast<PcapFileHeader>(byte_buffer.data())};
+  verify_magic_number(file_header);
+
+  // Now we construct the full PcapBuffer.
+  PcapBuffer pcap_buffer{std::move(byte_buffer)};
 
   return pcap_buffer;
 }
-
 } // namespace pcap

@@ -22,35 +22,21 @@ constinit std::array pcap_test_files = {"../test/2023-10-09.1849-1906.pcap"sv,
 
 auto pcap2json(const std::string_view pcap_path) -> void {
   using pcap::read_pcap_file;
-
-  try {
-    const auto pcap_buffer{read_pcap_file(pcap_path)};
-  } catch (const std::exception &e) {
-    std::cout << "Error: " << e.what() << '\n';
-  }
-}
-
-// File for
-auto test_default() -> int {
-  using pcap::read_pcap_file;
   using simba::simba_extractor;
 
+  const auto pcap_buffer{read_pcap_file(pcap_path)};
+
+  std::cout << "file: " << pcap_path
+            << ", packets captured: " << pcap_buffer.size() << '\n';
+
+  simba_extractor(pcap_buffer, pcap_path);
+}
+
+// Loop through test values and convert them.
+auto test_default() -> void {
   for (const auto &pcap_path : pcap_test_files) {
-    try {
-      const auto pcap_buffer{read_pcap_file(pcap_path)};
-
-      std::cout << "file: " << pcap_path
-                << ", packets captured: " << pcap_buffer.size() << '\n';
-
-      simba_extractor(pcap_buffer, pcap_path);
-    } catch (const std::exception &e) {
-      std::cout << "Test Error: " << e.what() << '\n';
-
-      return 1;
-    }
+    pcap2json(pcap_path);
   }
-
-  return 0;
 }
 
 auto main(const int argc, char *argv[]) -> int {
@@ -63,14 +49,23 @@ auto main(const int argc, char *argv[]) -> int {
       "The parser currently only supports systems using little endian.");
 
   // Quick and dirty way for the reviewer to test functionality.
-  if (argc > 1) {
-    for (auto index{argc}; index < argc; index++) {
-      pcap2json(argv[index]);
-    }
-  } else {
-    std::cout << "No arguments given running defaults.\n";
+  try {
+    if (argc > 1) {
+      std::cout << "Pcap files to convert: " << (argc - 1) << '\n';
 
-    return test_default();
+      // We need to skip the first entry as this is the program itself.
+      for (auto index{1}; index < argc; index++) {
+        pcap2json(argv[index]);
+      }
+    } else {
+      std::cout << "No arguments given running defaults.\n";
+
+      test_default();
+    }
+  } catch (const std::exception &e) {
+    std::cout << "Error: " << e.what() << '\n';
+
+    return 1;
   }
 
   return 0;

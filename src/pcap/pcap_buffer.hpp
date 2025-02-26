@@ -84,8 +84,6 @@ class PcapBuffer {
   PcapBuffer() = delete;
   PcapBuffer(ByteBuffer &&t_buffer);
 
-  //! Verify the mime type.
-  auto verify() -> void;
   auto header() const -> const PcapFileHeader *;
 
   auto begin() const -> PacketRegistery::const_iterator;
